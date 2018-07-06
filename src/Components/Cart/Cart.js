@@ -17,7 +17,7 @@ export default class Cart extends Component {
   }
 
   getCart() {
-    axios.get('/api/cart')
+    axios.get('/api/cart/')
     .then( (res) => {
       console.log(res.data)
       this.setState({
@@ -28,6 +28,7 @@ export default class Cart extends Component {
   }
 
   render() {
+    console.log(this.props)
     let carto = this.state.cart.map(element => {
       return (
         <div>
@@ -41,12 +42,14 @@ export default class Cart extends Component {
     })
 
     return (
+      
       <div>
         <h3>Cart</h3>
           <div className='cart-container'>
             {carto}
 
             <p>Total: ${this.state.total}</p>
+            <button>Checkout</button>
           </div>
       </div>
     )

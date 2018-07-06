@@ -8,7 +8,7 @@ export default class Deets extends Component {
 
   render() {
     console.log(this.props)
-    let {id, img, title, description, price } = this.props.deets
+    let {img, title, description, price } = this.props.deets
 
     return (
       <div className='product-container'>
@@ -16,7 +16,7 @@ export default class Deets extends Component {
         <h3>{title}</h3>
         <p>{description}</p>
         <p> ${price}.99</p>
-        <button>Add to Cart</button>
+        <button onClick={() => this.props.add()}>Add to Cart</button>
       </div>
     )
   }

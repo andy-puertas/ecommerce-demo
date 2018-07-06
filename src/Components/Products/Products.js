@@ -9,6 +9,7 @@ export default class Products extends Component {
       products: []
     }
     this.getProducts = this.getProducts.bind( this )
+    this.addTo = this.addTo.bind( this )
   }
 
   componentDidMount() {
@@ -16,13 +17,25 @@ export default class Products extends Component {
   }
   
   getProducts() {
-    axios.get('/api/products')
+    axios.get('/api/products/')
     .then((res) => {
       this.setState({
         products: res.data
       })
     })
   }
+
+  addTo(quantity, productID) {
+    //console.log(quantity, productID)
+    //let {quantity, productID} = this.props
+    axios.post('/api/tocart/', {quantity, productID})
+    .then( res => {
+      res.data
+    })
+    alert('Added to cart!')
+  }
+
+
   
   render() {
     let listing = this.state.products.map( element => {
@@ -31,6 +44,7 @@ export default class Products extends Component {
             <Deets
              deets={element}
              id={element.id}
+             add={this.addTo}
             />
           </div>
         )
