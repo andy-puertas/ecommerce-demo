@@ -1,0 +1,7 @@
+-- CREATE TABLE cart (
+--    id SERIAL PRIMARY KEY
+--    title TEXT
+--    description TEXT
+--    img TEXT
+--    price INT
+-- )
