@@ -12,5 +12,28 @@ module.exports = {
           res.status(500).send('error') });
     },
 
+    create: (req, res) => {
+        const {quantity, productID} = req.body
+        const db = req.app.get('db')
+
+        db.addToCart([quantity, productID])
+        .then( cart => res.status(200).send( cart ) )
+        .catch(  (err) => { 
+          console.log(err)
+          res.status(500).send('error') });
+
+        
+    },
+
+    view: (req, res) => {
+        const db = req.app.get('db')
+
+        db.view_cart()
+        .then( cart => res.status(200).send( cart ) )
+        .catch(  (err) => { 
+          console.log(err)
+          res.status(500).send('error') });
+    }
+
 
 }
