@@ -25,6 +25,19 @@ module.exports = {
         
     },
 
+    delete: (req, res) => {
+        const db = req.app.get('db')
+        const { id } = req.params
+        
+        db.delete_product([id])
+            .then(cart => res.status(200).send(cart))
+            .catch((err) => {
+                console.log(err)
+                res.status(500).send()
+            })
+    
+    },
+
     view: (req, res) => {
         const db = req.app.get('db')
 

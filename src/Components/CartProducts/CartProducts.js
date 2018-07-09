@@ -9,6 +9,7 @@ export default class CartProducts extends Component {
           <h4>{title}</h4>
           <p>${price}.99</p>
           <p>Quantity: {quantity}</p>
+          <button onClick={() => this.props.delete(id)}>Remove</button>
         </div>
       )
     }

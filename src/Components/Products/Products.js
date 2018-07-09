@@ -17,7 +17,7 @@ export default class Products extends Component {
   }
   
   getProducts() {
-    axios.get('/api/products/')
+    axios.get('/api/products')
     .then((res) => {
       this.setState({
         products: res.data
@@ -25,14 +25,14 @@ export default class Products extends Component {
     })
   }
 
-  addTo(quantity, productID) {
+  addTo() {
     //console.log(quantity, productID)
     //let {quantity, productID} = this.props
-    axios.post('/api/tocart/', {quantity, productID})
+    axios.post('/api/tocart')
     .then( res => {
-      res.data
+     
+      alert('Added to cart!')
     })
-    alert('Added to cart!')
   }
 
 

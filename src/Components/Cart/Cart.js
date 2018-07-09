@@ -10,6 +10,7 @@ export default class Cart extends Component {
       total: 0
     }
     this.getCart = this.getCart.bind( this )
+    this.deleteProd = this.deleteProd.bind( this )
   }
   
   componentDidMount() {
@@ -17,7 +18,7 @@ export default class Cart extends Component {
   }
 
   getCart() {
-    axios.get('/api/cart/')
+    axios.get('/api/cart')
     .then( (res) => {
       console.log(res.data)
       this.setState({
@@ -27,6 +28,17 @@ export default class Cart extends Component {
     })
   }
 
+  deleteProd(id) {
+    console.log(id)
+    axios.delete(`/api/remove/${id}`)
+      .then(res => {
+        res.data
+        this.getCart()
+      })
+    }
+      
+
+
   render() {
     console.log(this.props)
     let carto = this.state.cart.map(element => {
@@ -35,7 +47,7 @@ export default class Cart extends Component {
           <CartProducts
             prods={element}
             id={element.id}
-
+            delete={this.deleteProd}
           />
         </div>
       )

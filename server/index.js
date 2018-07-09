@@ -17,9 +17,10 @@ const {
 } = process.env
 
 
-app.get('/api/products/', ctrl.read)
-app.post('/api/tocart/', ctrl.create)
-app.get('/api/cart/', ctrl.view)
+app.get('/api/products', ctrl.read)
+app.post('/api/tocart', ctrl.create)
+app.get('/api/cart', ctrl.view)
+app.delete('/api/remove/:id', ctrl.delete)
 
 
 
