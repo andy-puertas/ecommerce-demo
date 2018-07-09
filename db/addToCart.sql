@@ -1,2 +1,2 @@
-INSERT INTO cart(quantity, productID)
-VALUES (1, $2);
+INSERT INTO cart(productid, quantity)
+VALUES ($1, 1);

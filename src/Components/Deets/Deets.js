@@ -1,10 +1,30 @@
 import React, { Component } from 'react';
-import './Deets.css'
+import axios from 'axios';
+import {connect} from 'react-redux';
+import {addCart} from '../../ducks/reducer'
+import './Deets.css';
 
-export default class Deets extends Component {
+class Deets extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this.addTo = this.addTo.bind( this )
   }
+
+  addTo() {
+    const {id} = this.props.deets;
+    let carty = {
+       productid: id
+    };
+
+    axios.post('/api/tocart', {carty})
+    .then( res => {
+      console.log(res);
+      console.log(res.data);
+      this.props.addCart(carty);
+      alert('Added to cart!');
+    }).catch('err')
+  }
+
 
   render() {
     console.log(this.props)
@@ -16,8 +36,17 @@ export default class Deets extends Component {
         <h3>{title}</h3>
         <p>{description}</p>
         <p> ${price}.99</p>
-        <button onClick={() => this.props.add()}>Add to Cart</button>
+        <button onClick={() => this.addTo()}>Add to Cart</button>
       </div>
     )
   }
 }
+
+function mapStateToProps(state) {
+  return {
+      productid: state.productid
+  }
+}
+
+
+export default connect(mapStateToProps, { addCart })(Deets)

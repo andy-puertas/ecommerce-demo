@@ -9,7 +9,7 @@ export default class Products extends Component {
       products: []
     }
     this.getProducts = this.getProducts.bind( this )
-    this.addTo = this.addTo.bind( this )
+    
   }
 
   componentDidMount() {
@@ -25,15 +25,6 @@ export default class Products extends Component {
     })
   }
 
-  addTo() {
-    //console.log(quantity, productID)
-    //let {quantity, productID} = this.props
-    axios.post('/api/tocart')
-    .then( res => {
-     
-      alert('Added to cart!')
-    })
-  }
 
 
   
@@ -44,7 +35,7 @@ export default class Products extends Component {
             <Deets
              deets={element}
              id={element.id}
-             add={this.addTo}
+             
             />
           </div>
         )

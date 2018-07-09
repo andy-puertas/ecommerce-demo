@@ -13,10 +13,10 @@ module.exports = {
     },
 
     create: (req, res) => {
-        const {quantity, productID} = req.body
         const db = req.app.get('db')
+        const {productid} = req.body.carty
 
-        db.addToCart([quantity, productID])
+        db.addToCart([productid])
         .then( cart => res.status(200).send( cart ) )
         .catch(  (err) => { 
           console.log(err)
@@ -33,7 +33,7 @@ module.exports = {
             .then(cart => res.status(200).send(cart))
             .catch((err) => {
                 console.log(err)
-                res.status(500).send()
+                res.status(500).send('error')
             })
     
     },
