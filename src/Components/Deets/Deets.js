@@ -31,8 +31,8 @@ class Deets extends Component {
     let {img, title, description, price } = this.props.deets
 
     return (
-      <div className='product-container'>
-        <img className='deets-image' src={img} alt='logo' />
+      <div className='product-items'>
+        <img className='deets-image' height={100} width={100} src={img} alt='logo' />
         <h3>{title}</h3>
         <p>{description}</p>
         <p> ${price}.99</p>

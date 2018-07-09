@@ -1,5 +1,30 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  width: 100%;
+  background-color: blanchedalmond;
+}
+
+.page-container {
+  width: 800px;
+  margin: 10px auto;
+  background-color: lightgrey;
+  padding: 28px;
+}
+
+.product-container {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  flex-direction: row
+}
+
+.product-items {
+  padding: 10px 30px;
+  width: 200px;
 }

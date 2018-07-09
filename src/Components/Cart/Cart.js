@@ -11,6 +11,7 @@ export default class Cart extends Component {
     }
     this.getCart = this.getCart.bind( this )
     this.deleteProd = this.deleteProd.bind( this )
+    this.getTotal = this.getTotal.bind( this )
   }
   
   componentDidMount() {
@@ -24,19 +25,28 @@ export default class Cart extends Component {
       this.setState({
         cart: res.data
       })
-
+      this.getTotal()
     })
   }
 
   deleteProd(id) {
     console.log(id)
     axios.delete(`/api/remove/${id}`)
-      .then(res => {
-        res.data
+      .then(res => res.data)
         this.getCart()
-      })
+        this.getTotal()
     }
+   
+  getTotal(){
+    console.log(this.state.total)
+    let cartTotal = 0
+    for(let i = 0; i < this.state.cart.length; i++ ){
+        cartTotal += (+this.state.cart[i].price * this.state.cart[i].quantity)
+    } this.setState({
+          total: cartTotal
+    })
       
+  }  
 
 
   render() {
@@ -56,11 +66,11 @@ export default class Cart extends Component {
     return (
       
       <div>
-        <h3>Cart</h3>
+        <h1>Cart</h1>
           <div className='cart-container'>
             {carto}
 
-            <p>Total: ${this.state.total}</p>
+            <p>Total: ${this.state.total}.99</p>
             <button>Checkout</button>
           </div>
       </div>

@@ -46,7 +46,23 @@ module.exports = {
         .catch(  (err) => { 
           console.log(err)
           res.status(500).send('error') });
-    }
+    },
+
+    edit: (req, res) => {
+        const {quantity, productid} = req.body
+         
+        const db = req.app.get('db');
+        console.log('console log:', req.params, req.body)
+        
+        
+        db.update_quantity([quantity, productid])
+        .then( cart => {
+            console.log( cart )
+            res.status(200).send( cart )})
+        .catch( (err) => { 
+            console.log(err)
+            res.status(500).send('error') });
+    },
 
 
 }

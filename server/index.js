@@ -20,6 +20,7 @@ const {
 app.get('/api/products', ctrl.read)
 app.post('/api/tocart', ctrl.create)
 app.get('/api/cart', ctrl.view)
+app.put('/api/quant', ctrl.edit)
 app.delete('/api/remove/:id', ctrl.delete)
 
 

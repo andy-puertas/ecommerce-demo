@@ -26,8 +26,6 @@ export default class Products extends Component {
   }
 
 
-
-  
   render() {
     let listing = this.state.products.map( element => {
         return (
@@ -43,11 +41,13 @@ export default class Products extends Component {
 
     console.log(this.state)
     return (
-      <div>
-        <h3>Products</h3>
+      <div className='product-container'>
+        <h1>Products</h1>
 
         {listing}
       </div>
     )
   }
 }
+
+  
