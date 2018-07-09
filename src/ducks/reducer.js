@@ -16,18 +16,20 @@ export default function reducer(state=initialState, action) {
       case ADD_CART:
             return Object.assign( {}, state, {
                 productid: payload.productid,
-                quantity: payload.quantity,
+                quantity: payload.quantity
                 // total: state.total += action.price
             } );
       case INCREASE_QUANTITY:
             return Object.assign({}, state, {
-                quantity: payload.quantity + 1
+                quantity: payload.quantity + 1,
+                productid: payload.productid
 
             });
 
       case DECREASE_QUANTITY:
             return Object.assign({}, state, {
-                quantity: payload.quantity - 1
+                quantity: payload.quantity - 1,
+                productid: payload.productid
             })
             default:
               return state;  
@@ -43,20 +45,22 @@ export function addCart(carty) {
   }
 }
 
-export function increaseQuantity(quantity) {
-  console.log(quantity)
+export function increaseQuantity(quantity, productid) {
+  console.log(quantity, productid)
   return {
       type: INCREASE_QUANTITY,
       payload:
-          quantity
+          quantity,
+          productid
   }
 }
 
-export function decreaseQuantity(quantity) {
+export function decreaseQuantity(quantity, productid) {
   console.log(quantity)
   return {
       type: DECREASE_QUANTITY,
       payload:
-          quantity
+          quantity,
+          productid
   }
 }

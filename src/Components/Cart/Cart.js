@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
+import { increaseQuantity } from '../../ducks/reducer';
+import { decreaseQuantity } from '../../ducks/reducer';
+import { connect } from 'react-redux';
 import axios from 'axios';
 import CartProducts from '../CartProducts/CartProducts'
 
-export default class Cart extends Component {
+class Cart extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -12,6 +15,8 @@ export default class Cart extends Component {
     this.getCart = this.getCart.bind( this )
     this.deleteProd = this.deleteProd.bind( this )
     this.getTotal = this.getTotal.bind( this )
+    this.incQuan = this.incQuan.bind( this )
+    this.decQuan = this.decQuan.bind( this )
   }
   
   componentDidMount() {
@@ -35,7 +40,26 @@ export default class Cart extends Component {
       .then(res => res.data)
         this.getCart()
         this.getTotal()
-    }
+  }
+
+  incQuan(quantity, productid) {
+    axios.put('/api/quant', {quantity, productid})
+    .then( res => {
+      console.log(res.data)
+      this.props.increaseQuantity(quantity, productid)
+    })
+    this.getCart();
+    this.getTotal();
+  }
+
+  decQuan(quantity, productid) {
+    axios.put('/api/quant', {quantity, productid})
+    .then( res => {
+      console.log(res.data)
+      this.props.decreaseQuantity(quantity, productid)
+    })
+  }
+
    
   getTotal(){
     console.log(this.state.total)
@@ -58,6 +82,7 @@ export default class Cart extends Component {
             prods={element}
             id={element.id}
             delete={this.deleteProd}
+            inc={this.incQuan}
           />
         </div>
       )
@@ -77,3 +102,12 @@ export default class Cart extends Component {
     )
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    quantity: state.quantity,
+    productid: state.productid
+  }
+}
+
+export default connect(mapStateToProps, {increaseQuantity, decreaseQuantity})(Cart)
