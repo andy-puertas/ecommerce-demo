@@ -16,20 +16,37 @@ module.exports = {
         const db = req.app.get('db')
         const {productid} = req.body.carty
 
+
+        // db.check_for_product()
+        // .then(cart => {
+        //     if (cart.length > 0) {
+        //         let quantity = cart[0].quantity + 1
+        //         db.update_quantity([quantity, productid])
+        //             .then(cart => res.status(200).send(cart))
+        //             .catch((err) => {
+        //                 console.log(err)
+        //                 res.status(500).send('error')
+        //             })
+        //         } else {
+        //         } 
+
         db.addToCart([productid])
-        .then( cart => res.status(200).send( cart ) )
-        .catch(  (err) => { 
-          console.log(err)
-          res.status(500).send('error') });
+        .then( cart => res.status(200).send( cart ))
+        .catch( (err) => { 
+                console.log(err)
+                res.status(500).send('error') 
+            });
+        
 
         
+          
     },
 
     delete: (req, res) => {
         const db = req.app.get('db')
         const { id } = req.params
         
-        db.delete_product([id])
+        db.delete_product([+id])
             .then(cart => res.status(200).send(cart))
             .catch((err) => {
                 console.log(err)
@@ -52,7 +69,7 @@ module.exports = {
         const {quantity, productid} = req.body
          
         const db = req.app.get('db');
-        console.log('console log:', req.params, req.body)
+        //console.log('console log:', req.params, req.body)
         
         
         db.update_quantity([quantity, productid])

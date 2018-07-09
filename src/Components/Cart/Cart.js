@@ -17,6 +17,7 @@ class Cart extends Component {
     this.getTotal = this.getTotal.bind( this )
     this.incQuan = this.incQuan.bind( this )
     this.decQuan = this.decQuan.bind( this )
+    this.onClear = this.onClear.bind( this )
   }
   
   componentDidMount() {
@@ -43,21 +44,24 @@ class Cart extends Component {
   }
 
   incQuan(quantity, productid) {
-    axios.put('/api/quant', {quantity, productid})
+    axios.put('/api/quant', {quantity: ++quantity, productid})
     .then( res => {
       console.log(res.data)
-      this.props.increaseQuantity(quantity, productid)
+      this.props.increaseQuantity(quantity)
     })
-    this.getCart();
     this.getTotal();
+    this.getCart();
   }
 
   decQuan(quantity, productid) {
-    axios.put('/api/quant', {quantity, productid})
+    console.log(quantity, productid)
+    axios.put('/api/quant', {quantity: --quantity, productid})
     .then( res => {
       console.log(res.data)
-      this.props.decreaseQuantity(quantity, productid)
+      this.props.decreaseQuantity(quantity)
     })
+    this.getTotal();
+    this.getCart();
   }
 
    
@@ -67,10 +71,18 @@ class Cart extends Component {
     for(let i = 0; i < this.state.cart.length; i++ ){
         cartTotal += (+this.state.cart[i].price * this.state.cart[i].quantity)
     } this.setState({
-          total: cartTotal
+          total: cartTotal + '.99'
     })
       
-  }  
+  }
+  
+  onClear() {
+    this.setState({
+      cart: [],
+      total: 0
+    })
+    alert('Thank you for shopping!')
+  }
 
 
   render() {
@@ -83,6 +95,7 @@ class Cart extends Component {
             id={element.id}
             delete={this.deleteProd}
             inc={this.incQuan}
+            dec={this.decQuan}
           />
         </div>
       )
@@ -95,8 +108,10 @@ class Cart extends Component {
           <div className='cart-container'>
             {carto}
 
-            <p>Total: ${this.state.total}.99</p>
-            <button>Checkout</button>
+            <h3>Total: ${this.state.total}</h3>
+            <button id='checkout-button'
+            onClick={() => this.onClear()}
+            >Checkout</button>
           </div>
       </div>
     )

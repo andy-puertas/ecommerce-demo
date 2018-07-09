@@ -11,7 +11,7 @@ body {
 }
 
 .page-container {
-  width: 800px;
+  width: 900px;
   margin: 10px auto;
   background-color: lightgrey;
   padding: 28px;
@@ -22,6 +22,20 @@ body {
   flex: 1;
   flex-wrap: wrap;
   flex-direction: row
+}
+
+.cart-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#checkout-button {
+  width: 14%;
+}
+
+.product-incart {
+  padding: 10px 8px;
+  
 }
 
 .product-items {
