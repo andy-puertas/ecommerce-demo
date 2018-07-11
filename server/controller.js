@@ -46,7 +46,7 @@ module.exports = {
         const db = req.app.get('db')
         const { id } = req.params
         
-        db.delete_product([+id])
+        db.delete_product([id])
             .then(cart => res.status(200).send(cart))
             .catch((err) => {
                 console.log(err)

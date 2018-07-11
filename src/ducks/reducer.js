@@ -19,6 +19,7 @@ export default function reducer(state=initialState, action) {
                 quantity: payload.quantity
                 // total: state.total += action.price
             } );
+            
       case INCREASE_QUANTITY:
             return Object.assign({}, state, {
                 quantity: payload.quantity + 1,

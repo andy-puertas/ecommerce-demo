@@ -3,7 +3,7 @@ import routes from './routes';
 import { NavLink } from 'react-router-dom';
 import './App.css';
 
-const Topnav = (props) => <nav>
+const Topnav = () => <nav>
   <ul>
     <li><NavLink to='/'>Products</NavLink></li>
     <li><NavLink to='/cart'>Cart</NavLink></li>
